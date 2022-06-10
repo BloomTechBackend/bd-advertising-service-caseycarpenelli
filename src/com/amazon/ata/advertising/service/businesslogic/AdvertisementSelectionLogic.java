@@ -65,18 +65,26 @@ public class AdvertisementSelectionLogic {
         GeneratedAdvertisement generatedAdvertisement = new EmptyGeneratedAdvertisement();
         if (StringUtils.isEmpty(marketplaceId)) {
             LOG.warn("MarketplaceId cannot be null or empty. Returning empty ad.");
+            return new EmptyGeneratedAdvertisement();
         } else {
             final List<AdvertisementContent> contents = contentDao.get(marketplaceId);
         if (StringUtils.isEmpty(customerId)) {
             LOG.warn("the Id cannot be empty");
         } else {
             //changed what the get took in because it was actually called contentid compared to my previous which was the customerid
-            String contentId = contents.stream().findFirst().get().getContentId();
-            final List<TargetingGroup> content = targetingGroupDao.get(contentId); // returns list of target stuff
+            if (contents.isEmpty()) {
+                return new EmptyGeneratedAdvertisement();
+            }
+//            String contentId = contents.stream().findFirst().get().getContentId();
+            final List<TargetingGroup> content = targetingGroupDao.get(contents.stream().findFirst().get().getContentId()); // returns list of target stuff
             //the above method is not returning anything. because of an exception
+            if (content.isEmpty()) {
+                return new EmptyGeneratedAdvertisement();
+            }
             content.stream().sorted(); // im aware it needs to be by click through rate
+
             TargetingPredicateResult targetingPredicateResult = new TargetingEvaluator(new RequestContext(customerId, marketplaceId))
-                    .evaluate(content.iterator().next());
+                    .evaluate(content.stream().findAny().get());
             if (targetingPredicateResult.isTrue()) {
                 AdvertisementContent trueAd = contents.get(random.nextInt(contents.size()));
                 generatedAdvertisement = new GeneratedAdvertisement(trueAd);
