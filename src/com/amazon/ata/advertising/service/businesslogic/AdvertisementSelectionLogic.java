@@ -74,7 +74,7 @@ public class AdvertisementSelectionLogic {
             String contentId = contents.stream().findFirst().get().getContentId();
             final List<TargetingGroup> content = targetingGroupDao.get(contentId); // returns list of target stuff
             //the above method is not returning anything. because of an exception
-            content.stream().sorted(); //still needs to sort here just getting an error. im aware it needs to be by click through rate
+            content.stream().sorted(); // im aware it needs to be by click through rate
             TargetingPredicateResult targetingPredicateResult = new TargetingEvaluator(new RequestContext(customerId, marketplaceId))
                     .evaluate(content.iterator().next());
             if (targetingPredicateResult.isTrue()) {
