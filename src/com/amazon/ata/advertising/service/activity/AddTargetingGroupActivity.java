@@ -14,6 +14,8 @@ import org.apache.logging.log4j.Logger;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
+import java.util.stream.Collectors;
 import javax.inject.Inject;
 
 /**
@@ -24,7 +26,7 @@ import javax.inject.Inject;
  * clickThroughRate can be learned.
  */
 public class AddTargetingGroupActivity {
-    public static final boolean IMPLEMENTED_STREAMS = false;
+    public static final boolean IMPLEMENTED_STREAMS = true;
     private static final Logger LOG = LogManager.getLogger(AddTargetingGroupActivity.class);
 
     private final TargetingGroupDao targetingGroupDao;
@@ -52,12 +54,9 @@ public class AddTargetingGroupActivity {
             contentId));
 
         List<TargetingPredicate> targetingPredicates = new ArrayList<>();
+
         if (requestedTargetingPredicates != null) {
-            for (com.amazon.ata.advertising.service.model.TargetingPredicate targetingPredicate :
-                requestedTargetingPredicates) {
-                TargetingPredicate predicate = TargetingPredicateTranslator.fromCoral(targetingPredicate);
-                targetingPredicates.add(predicate);
-            }
+            requestedTargetingPredicates.stream().map(TargetingPredicateTranslator::fromCoral).forEach(targetingPredicates::add);
         }
 
         TargetingGroup targetingGroup = targetingGroupDao.create(contentId, targetingPredicates);
@@ -68,3 +67,6 @@ public class AddTargetingGroupActivity {
     }
 
 }
+//needs to check if the predicates created previous are not null
+// loops through and get from coral and then add to a list
+//then pass through the targeting dao

@@ -44,7 +44,7 @@ public class MasteryTaskOneLogicTests {
     }
 
     @Test
-    public void generateAdvertisement_withNonExistantMarketplace_returnsEmptyContent() {
+    public void generateAdvertisement_withNonExistentMarketplace_returnsEmptyContent() {
         GenerateAdvertisementRequest request = GenerateAdvertisementRequest.builder()
             .withCustomerId(EMPTY_PROFILE_CUSTOMER_ID)
             .withMarketplaceId("TCT_TESTS_MARKETPLACE_ID")

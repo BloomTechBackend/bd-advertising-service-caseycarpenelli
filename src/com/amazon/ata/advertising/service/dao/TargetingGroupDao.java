@@ -6,10 +6,14 @@ import com.amazon.ata.advertising.service.targeting.TargetingGroup;
 import com.amazon.ata.advertising.service.targeting.predicate.TargetingPredicate;
 
 import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBMapper;
-import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBQueryExpression;
+import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBScanExpression;
+import com.amazonaws.services.dynamodbv2.model.AttributeValue;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.UUID;
+import java.util.stream.Collectors;
 import javax.inject.Inject;
 
 /**
@@ -38,12 +42,22 @@ public class TargetingGroupDao implements ReadableDao<String, List<TargetingGrou
      */
     @Override
     public List<TargetingGroup> get(String contentId) {
-        TargetingGroup indexHashKey = new TargetingGroup(null, contentId, 0,  null);
-        DynamoDBQueryExpression<TargetingGroup> queryExpression = new DynamoDBQueryExpression<TargetingGroup>()
-                .withIndexName(TargetingGroup.CONTENT_ID_INDEX)
-                .withConsistentRead(false)
-                .withHashKeyValues(indexHashKey);
-        return mapper.query(TargetingGroup.class, queryExpression);
+//        TargetingGroup indexHashKey = new TargetingGroup(null, contentId, 0,  null);
+//        DynamoDBQueryExpression<TargetingGroup> queryExpression = new DynamoDBQueryExpression<TargetingGroup>()
+//                .withIndexName(TargetingGroup.CONTENT_ID_INDEX)
+//                .withConsistentRead(false)
+//                .withHashKeyValues(indexHashKey);
+//        List<TargetingGroup> target = mapper.scan(TargetingGroup.class, scanExpression);
+//        List<List<TargetingPredicate>> idk = target.stream().map(TargetingGroup::getTargetingPredicates).collect(Collectors.toList());
+        Map<String, AttributeValue> valueMap = new HashMap<>();
+        valueMap.put(":contentId", new AttributeValue(contentId));
+        valueMap.put(":contentId1", new AttributeValue(contentId.replace(contentId.charAt(contentId.length() - 1), '0')));
+        DynamoDBScanExpression scanExpression = new DynamoDBScanExpression()
+                .withFilterExpression("contentId contains :contentId") // need correct syntax
+                .withFilterExpression("ContentId between :contentId1 and :contentId")
+                .withExpressionAttributeValues(valueMap);
+
+        return mapper.scan(TargetingGroup.class, scanExpression);
     }
 
     /**

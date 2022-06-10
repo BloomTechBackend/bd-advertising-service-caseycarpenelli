@@ -53,6 +53,7 @@ public class GenerateAdActivity {
                     .withAdvertisement(AdvertisementTranslator.toCoral(generatedAd))
                     .build();
         } catch (Exception e) {
+            e.printStackTrace();
             LOG.error(String.format(
                 "Something unexpected happened when calling GenerateAdvertisement for customer, %s, in marketplace %s.",
                 request.getCustomerId(),

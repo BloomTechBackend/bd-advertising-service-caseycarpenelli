@@ -73,4 +73,7 @@ public abstract class TargetingPredicate {
     public boolean isInverse() {
         return inverse;
     }
+
+//    public <R> R targetingPredicates() {
+//    }
 }
