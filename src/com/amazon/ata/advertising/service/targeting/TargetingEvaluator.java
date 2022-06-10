@@ -25,9 +25,6 @@ public class TargetingEvaluator {
         this.requestContext = requestContext;
     }
 
-//    public TargetingEvaluator() {
-//
-//    }
 
     /**
      * Evaluate a TargetingGroup to determine if all of its TargetingPredicates are TRUE or not for the given

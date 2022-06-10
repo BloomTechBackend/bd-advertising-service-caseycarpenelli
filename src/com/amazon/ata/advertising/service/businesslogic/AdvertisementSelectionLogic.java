@@ -69,7 +69,6 @@ public class AdvertisementSelectionLogic {
             final List<AdvertisementContent> contents = contentDao.get(marketplaceId);
         if (StringUtils.isEmpty(customerId)) {
             LOG.warn("the Id cannot be empty");
-
         } else {
             //changed what the get took in because it was actually called contentid compared to my previous which was the customerid
             String contentId = contents.stream().findFirst().get().getContentId();
@@ -79,21 +78,17 @@ public class AdvertisementSelectionLogic {
             TargetingPredicateResult targetingPredicateResult = new TargetingEvaluator(new RequestContext(customerId, marketplaceId))
                     .evaluate(content.iterator().next());
             if (targetingPredicateResult.isTrue()) {
-
                 AdvertisementContent trueAd = contents.get(random.nextInt(contents.size()));
                 generatedAdvertisement = new GeneratedAdvertisement(trueAd);
             } else {
                 generatedAdvertisement = new EmptyGeneratedAdvertisement();
             }
-
         }
             if (CollectionUtils.isNotEmpty(contents)) {
                 AdvertisementContent randomAdvertisementContent = contents.get(random.nextInt(contents.size()));
                 generatedAdvertisement = new GeneratedAdvertisement(randomAdvertisementContent);
             }
-
         }
-
         return generatedAdvertisement;
     }
 }
