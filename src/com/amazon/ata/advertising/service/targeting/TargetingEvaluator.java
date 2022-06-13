@@ -15,7 +15,7 @@ import java.util.stream.Collectors;
 public class TargetingEvaluator {
     public static final boolean IMPLEMENTED_STREAMS = true;
     public static final boolean IMPLEMENTED_CONCURRENCY = false;
-    final private RequestContext requestContext; // used to be final
+    final private RequestContext requestContext;
 
     /**
      * Creates an evaluator for targeting predicates.
