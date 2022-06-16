@@ -71,7 +71,7 @@ public class AdvertisementSelectionLogic {
         if (StringUtils.isEmpty(customerId)) {
             LOG.warn("the Id cannot be empty");
         } else {
-            //changed what the get took in because it was actually called contentid compared to my previous which was the customerid
+            //changed  what the get took in because it was actually called contentid compared to my previous which was the customerid
             if (contents.isEmpty()) {
                 return new EmptyGeneratedAdvertisement();
             }
