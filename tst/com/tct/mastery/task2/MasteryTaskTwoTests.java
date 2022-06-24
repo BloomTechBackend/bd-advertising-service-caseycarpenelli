@@ -8,8 +8,8 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.junit.jupiter.api.Test;
 
-import static com.tct.helper.TestConstants.PARENT_PROFILE_CUSTOMER_ID;
-import static com.tct.helper.TestConstants.US_MARKETPLACE_ID;
+import static com.tct.mastery.task1.helper.TestConstants.PARENT_PROFILE_CUSTOMER_ID;
+import static com.tct.mastery.task1.helper.TestConstants.US_MARKETPLACE_ID;
 import static org.testng.Assert.assertFalse;
 import static org.testng.Assert.assertNotNull;
 

@@ -6,7 +6,7 @@ import com.amazon.ata.advertising.service.model.responses.GenerateAdvertisementR
 import org.apache.commons.lang3.StringUtils;
 import org.junit.jupiter.api.Test;
 
-import static com.tct.helper.TestConstants.*;
+import static com.tct.mastery.task1.helper.TestConstants.*;
 import static org.testng.Assert.*;
 
 public class MasteryTaskOneLogicTests {

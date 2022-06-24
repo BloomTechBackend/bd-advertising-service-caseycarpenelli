@@ -11,12 +11,14 @@ import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBTable;
 import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBTypeConverted;
 
 import java.util.List;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 
 /**
  * A targeting group for an advertisement, required to show if this advertisement should be rendered.
  */
 @DynamoDBTable(tableName = "TargetingGroups")
-public class TargetingGroup {
+public class TargetingGroup implements Runnable { //implement something
     public static final String CONTENT_ID_INDEX = "ContentIdIndex";
 
     @DynamoDBHashKey(attributeName = "TargetingGroupId")
@@ -85,5 +87,11 @@ public class TargetingGroup {
 
     public void setTargetingPredicates(List<TargetingPredicate> targetingPredicates) {
         this.targetingPredicates = targetingPredicates;
+    }
+
+    @Override
+    public void run() { // fill this
+        ExecutorService executorService = Executors.newCachedThreadPool();
+//        executorService.isShutdown();
     }
 }

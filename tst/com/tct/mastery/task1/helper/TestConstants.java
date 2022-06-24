@@ -1,4 +1,4 @@
-package com.tct.helper;
+package com.tct.mastery.task1.helper;
 
 /**
  * Contains constant values used in TCTs.

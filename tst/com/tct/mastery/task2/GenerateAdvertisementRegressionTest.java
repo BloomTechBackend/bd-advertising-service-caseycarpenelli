@@ -6,8 +6,8 @@ import com.amazon.ata.advertising.service.model.responses.GenerateAdvertisementR
 import org.apache.commons.lang3.StringUtils;
 import org.junit.jupiter.api.Test;
 
-import static com.tct.helper.TestConstants.PARENT_PROFILE_CUSTOMER_ID;
-import static com.tct.helper.TestConstants.US_MARKETPLACE_ID;
+import static com.tct.mastery.task1.helper.TestConstants.PARENT_PROFILE_CUSTOMER_ID;
+import static com.tct.mastery.task1.helper.TestConstants.US_MARKETPLACE_ID;
 import static org.testng.Assert.assertFalse;
 import static org.testng.Assert.assertNotNull;
 

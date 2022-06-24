@@ -15,7 +15,7 @@ import java.util.List;
 import java.util.UUID;
 import java.util.stream.DoubleStream;
 
-public class MasteryTaskThreeTests {
+class kMasteryTaskThreeTests {
     private MasteryTaskThreeHelper helper;
     private List<String> contentToCleanup;
 
